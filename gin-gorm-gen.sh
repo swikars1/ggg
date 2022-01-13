@@ -34,7 +34,7 @@ for entity in "${entity_path_hash[@]}"; do
   entity_path="${entity##*:}"
   file_to_write="$entity_path/${resource_table}.go"
 
-  cat "./${entity_name}-template.txt" > $file_to_write
+  cat "./templates/${entity_name}-template.go" > $file_to_write
   for item in "${value_replacer_hash[@]}"; do
     from_val="${item%%:*}"
     to_val="${item##*:}"
@@ -73,7 +73,7 @@ echo $fx_route_path "updated."
 # migration_up_filepath=`find . -name "*${migration_name}.up.sql"`
 # migration_down_filepath=`find . -name "*${migration_name}.down.sql"`
 
-# sed "s/{{resourcetable}}/$resource_table/g" ./ggg/up-migration-template.txt > "${migration_up_filepath}"
+# sed "s/{{resourcetable}}/$resource_table/g" ./ggg/templates/up-migration-template.go > "${migration_up_filepath}"
 # echo "DROP TABLE IF EXISTS ${resource_table};" > $migration_down_filepath
 # cd ggg/
 
