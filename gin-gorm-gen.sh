@@ -13,9 +13,9 @@ echo "Enter plural resource name(eg: ProductCategories):"; read plural_resource
 lc_resource=$(first_lower $uc_resource)
 plc_resource=$(first_lower $plural_resource)
 
-printf "\n* Generating Scaffold for ${uc_resource} *\n"
+printf "\n* Generating Scaffold for ${uc_resource} *\n\n"
 
-value_replacer_hash=(
+placeholder_value_hash=(
   "{{ucresource}}:$uc_resource"
   "{{plcresource}}:$plc_resource"
   "{{lcresource}}:$lc_resource"
@@ -35,10 +35,10 @@ for entity in "${entity_path_hash[@]}"; do
   file_to_write="$entity_path/${resource_table}.go"
 
   cat "./templates/${entity_name}-template.go" > $file_to_write
-  for item in "${value_replacer_hash[@]}"; do
-    from_val="${item%%:*}"
-    to_val="${item##*:}"
-    sed -i "" "s/$from_val/$to_val/g" $file_to_write
+  for item in "${placeholder_value_hash[@]}"; do
+    placeholder="${item%%:*}"
+    value="${item##*:}"
+    sed -i "" "s/$placeholder/$value/g" $file_to_write
   done
   echo $file_to_write "created."
 done
