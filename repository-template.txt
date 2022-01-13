@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"strings"
-	"time"
 	"{{projectname}}/infrastructure"
 	"{{projectname}}/models"
 	"{{projectname}}/utils"
@@ -76,9 +74,6 @@ func (c {{ucresource}}Repository) UpdateOne{{ucresource}}({{ucresource}} models.
 		Where("id = ?", {{ucresource}}.ID).
 		Updates(map[string]interface{}{
 			"title":           {{ucresource}}.Title,
-			"is_public":       {{ucresource}}.IsPublic,
-			"overview":        {{ucresource}}.Overview,
-			"cover_image":     {{ucresource}}.CoverImage,
 		}).Error
 }
 
